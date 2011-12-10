@@ -58,7 +58,7 @@ specs = describe "Data.Prob" $
                 x = weighted [(0, 1), (1, 2)]
                 p = f <*> x
 
-            prob p @?= [(2,1%9), (5,2%9), (3, 2%9) ,(6,4%9)]
+            prob p @?= [(2,1%9), (3, 2%9), (5,2%9), (6,4%9)]
         ]
 
     , describe "instance Monad Prob" $

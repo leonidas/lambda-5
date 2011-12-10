@@ -58,7 +58,7 @@ specs = describe "Data.Prob" $
                 x = weighted [(0, 1), (1, 2)]
                 p = f <*> x
 
-            prob p @?= [(2,1%9), (5,2%9), (3, 2%9) ,(6,4%9)]
+            prob p @?= [(2,1%9), (3, 2%9), (5,2%9), (6,4%9)]
         ]
 
     , describe "instance Monad Prob" $
@@ -76,6 +76,13 @@ specs = describe "Data.Prob" $
                 , ("hello there", 2 % 9)
                 , ("goodbye!",    2 % 3)
                 ]
+
+        , it "can be used in simple example" $ do
+            let p = weighted [("foo", 1), ("bar", 2)]
+                f x = evenDist [x, "asdf"]
+                g = p >>= f
+
+            prob g @?= [("foo", 1%6), ("asdf", 1%6), ("bar", 2%6), ("asdf", 2%6)]
         ]
     ]
 
