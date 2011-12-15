@@ -2,17 +2,17 @@
 import Data.Prob
 import Control.Monad
 
-data NFA i s = NFA
+data PA s i = PA
     { initialState    :: s
     , stateTransition :: s -> i -> Prob s
     , isGoal          :: s -> Bool
     }
 
-validProb :: NFA i s -> [i] -> Prob s
-validProb (NFA initial transition goal) = foldM transition initial
+validProb :: PA s i -> [i] -> Prob s
+validProb (PA initial transition goal) = foldM transition initial
 
-test :: NFA Char Int
-test = NFA
+test :: PA Int Char
+test = PA
     { initialState = 0
     , isGoal       = (==0)
     , stateTransition = f
