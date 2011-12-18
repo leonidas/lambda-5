@@ -8,8 +8,8 @@ data PA s i = PA
     , isGoal          :: s -> Bool
     }
 
-validProb :: PA s i -> [i] -> Prob s
-validProb (PA initial transition goal) = foldM transition initial
+runPA :: PA s i -> [i] -> Prob s
+runPA (PA initial transition goal) = foldM transition initial
 
 test :: PA Int Char
 test = PA
